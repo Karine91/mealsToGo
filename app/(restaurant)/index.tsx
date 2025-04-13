@@ -1,4 +1,6 @@
 import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import SearchBar from "@/components/SearchBar";
+import RestaurantInfoCard from "@/features/restaurants/components/RestaurantInfoCard";
 
 export default function Index() {
   return (
@@ -8,10 +10,10 @@ export default function Index() {
       }}
     >
       <View style={styles.search}>
-        <Text>Search.</Text>
+        <SearchBar />
       </View>
       <View style={styles.list}>
-        <Text>List.</Text>
+        <RestaurantInfoCard />
       </View>
     </SafeAreaView>
   );
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
   },
   search: {
     padding: 16,
-    backgroundColor: "green",
+    backgroundColor: "white",
   },
   list: {
     backgroundColor: "blue",
