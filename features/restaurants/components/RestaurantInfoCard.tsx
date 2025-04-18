@@ -1,14 +1,21 @@
 import React from "react";
 import { Card } from "react-native-paper";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 
-const CardStyled = styled(Card)({
-  backgroundColor: "white",
-});
+const CardStyled = styled(Card)(({ theme }) => ({
+  backgroundColor: theme.colors.ui.white,
+}));
 
-const CartCover = styled(Card.Cover)(({ theme }) => ({
+const CardCover = styled(Card.Cover)(({ theme }) => ({
   padding: 20,
-  backgroundColor: theme.colors.ui.quaternary,
+  backgroundColor: theme.colors.bg.primary,
+}));
+
+const CardTitle = styled(Text)(({ theme }) => ({
+  fontFamily: theme.fonts.body,
+  padding: theme.space[3],
+  color: theme.colors.ui.primary,
 }));
 
 type Props = {
@@ -37,8 +44,8 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
   } = restaurant;
   return (
     <CardStyled elevation={5}>
-      <CartCover key={name} source={{ uri: photos[0] }} />
-      <Card.Title title={name} />
+      <CardCover key={name} source={{ uri: photos[0] }} />
+      <CardTitle>{name}</CardTitle>
     </CardStyled>
   );
 };
