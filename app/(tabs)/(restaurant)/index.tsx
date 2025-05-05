@@ -1,4 +1,4 @@
-import { View, SafeAreaView, FlatList } from "react-native";
+import { View, SafeAreaView, FlatList, StatusBar } from "react-native";
 import SearchBar from "@/components/SearchBar";
 import RestaurantInfoCard from "@/features/restaurants/components/restaurant-info-card/RestaurantInfoCard";
 import styled from "styled-components/native";
@@ -19,9 +19,9 @@ const list = [
   { name: "14" },
   { name: "15" },
   { name: "16" },
-]
+];
 
-type ListItem = typeof list[number];
+type ListItem = (typeof list)[number];
 
 const SearchView = styled(View)(({ theme }) => ({
   padding: theme.space[3],
@@ -29,11 +29,11 @@ const SearchView = styled(View)(({ theme }) => ({
 }));
 
 const ContainerView = styled(SafeAreaView)({
-  flex: 1,
+  flex: 1
 });
 
 const RestaurantList = styled(FlatList<ListItem>).attrs({
-  contentContainerStyle: { padding: 16, gap: 16 }
+  contentContainerStyle: { padding: 16, gap: 16 },
 })``;
 
 export default function Index() {

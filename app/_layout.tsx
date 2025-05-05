@@ -26,7 +26,8 @@ export default function RootLayout() {
     <>
       <ThemeProvider theme={theme}>
         <Stack>
-          <Stack.Screen name="(restaurant)" />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>
 

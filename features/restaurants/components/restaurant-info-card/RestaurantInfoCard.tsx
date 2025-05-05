@@ -51,8 +51,8 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+            {ratingArray.map((_, ind) => (
+              <SvgXml key={ind} xml={star} width={20} height={20} />
             ))}
           </Rating>
           <SectionEnd>
@@ -63,7 +63,6 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
             <Icon source={{ uri: icon }} />
           </SectionEnd>
         </Section>
-
         <Address>{address}</Address>
       </Info>
     </CardStyled>
