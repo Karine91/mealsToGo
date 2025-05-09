@@ -3,6 +3,9 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "@/infrastructure/theme";
 
+import { RestaurantsContextProvider } from "@/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "@/services/location/location.context";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -25,10 +28,14 @@ export default function RootLayout() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar />

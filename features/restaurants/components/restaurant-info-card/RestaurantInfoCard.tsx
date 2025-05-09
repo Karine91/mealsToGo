@@ -16,17 +16,10 @@ import {
   Address,
   Icon,
 } from "./styles";
+import { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
 type Props = {
-  restaurant?: {
-    name: string;
-    icon: any;
-    photos: string[];
-    address: string;
-    isOpenNow: boolean;
-    rating: number;
-    isClosedTemporarily: boolean;
-  };
+  restaurant?: RestaurantsItem;
 };
 
 const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
@@ -36,7 +29,7 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
-    address = "100 some random street",
+    vicinity,
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
@@ -46,7 +39,7 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
 
   return (
     <CardStyled elevation={5}>
-      <CardCover key={name} source={{ uri: photos[0] }} />
+      <CardCover key={name} source={{ uri: photos[0] as string }} />
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
@@ -63,7 +56,7 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
             <Icon source={{ uri: icon }} />
           </SectionEnd>
         </Section>
-        <Address>{address}</Address>
+        <Address>{vicinity}</Address>
       </Info>
     </CardStyled>
   );

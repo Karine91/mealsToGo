@@ -28,14 +28,14 @@ export default function TabsLayout() {
   return (
     <TabsStyled>
       <Tabs.Screen
-        name="(restaurant)"
+        name="index"
         options={{
           title: "Restaurant",
           tabBarIcon: tabBarIcon("restaurant-sharp"),
         }}
       />
       <Tabs.Screen
-        name="(map)"
+        name="map"
         options={{
           title: "Map",
           tabBarIcon: tabBarIcon("map-outline"),
