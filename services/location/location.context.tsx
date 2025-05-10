@@ -35,8 +35,11 @@ export const LocationContextProvider = ({ children }: PropsWithChildren) => {
   const onSearch = (searchTerm: string) => {
     setIsLoading(true);
     setKeyword(searchTerm);
-    if (!searchTerm) return;
-    locationRequest(searchTerm.toLowerCase())
+  };
+
+  useEffect(() => {
+    if (!keyword) return;
+    locationRequest(keyword.toLowerCase())
       .then(locationTransform)
       .then((result) => {
         setLocation(result);
@@ -47,7 +50,7 @@ export const LocationContextProvider = ({ children }: PropsWithChildren) => {
       .finally(() => {
         setIsLoading(false);
       });
-  };
+  }, [keyword]);
 
   return (
     <LocationContext.Provider

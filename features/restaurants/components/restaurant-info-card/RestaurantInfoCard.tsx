@@ -19,20 +19,19 @@ import {
 import { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
 type Props = {
-  restaurant?: RestaurantsItem;
+  restaurant: RestaurantsItem;
 };
 
-const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
+const RestaurantInfoCard = ({ restaurant }: Props) => {
   const {
-    name = "Some Restaurant",
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-    photos = [
-      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
-    ],
-    vicinity,
+    name,
+    icon,
+    photos,
+    address,
     isOpenNow = true,
-    rating = 4,
-    isClosedTemporarily = true,
+    rating = 0,
+    isClosedTemporarily,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from({ length: rating });
@@ -45,7 +44,12 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
         <Section>
           <Rating>
             {ratingArray.map((_, ind) => (
-              <SvgXml key={ind} xml={star} width={20} height={20} />
+              <SvgXml
+                key={`star-${placeId}-${ind}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>
@@ -56,7 +60,7 @@ const RestaurantInfoCard = ({ restaurant = {} as any }: Props) => {
             <Icon source={{ uri: icon }} />
           </SectionEnd>
         </Section>
-        <Address>{vicinity}</Address>
+        <Address>{address}</Address>
       </Info>
     </CardStyled>
   );

@@ -3,6 +3,7 @@ import React, {
   createContext,
   useEffect,
   PropsWithChildren,
+  useContext,
 } from "react";
 
 import {
@@ -10,6 +11,8 @@ import {
   restaurantsTransform,
   type RestaurantsItem,
 } from "./restaurants.service";
+import { LocationContext } from "../location/location.context";
+import type { Location } from "../location/location.service";
 
 export const RestaurantsContext = createContext({
   restaurants: [] as RestaurantsItem[],
@@ -21,11 +24,13 @@ export const RestaurantsContextProvider = ({ children }: PropsWithChildren) => {
   const [restaurants, setRestaurants] = useState<RestaurantsItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { location } = useContext(LocationContext);
 
-  function retrieveRestaurants() {
+  function retrieveRestaurants(location: Location) {
+    const locationStr = `${location.lat},${location.lng}` as const;
     setIsLoading(true);
     setTimeout(() => {
-      restaurantsRequest()
+      restaurantsRequest(locationStr)
         .then(restaurantsTransform)
         .then(setRestaurants)
         .catch(setError)
@@ -34,8 +39,10 @@ export const RestaurantsContextProvider = ({ children }: PropsWithChildren) => {
   }
 
   useEffect(() => {
-    retrieveRestaurants();
-  }, []);
+    if (location) {
+      retrieveRestaurants(location);
+    }
+  }, [location]);
 
   return (
     <RestaurantsContext.Provider

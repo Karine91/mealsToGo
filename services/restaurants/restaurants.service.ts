@@ -4,7 +4,7 @@ import camelize from "camelize";
 export type RestaurantsResult = (typeof mocks)[keyof typeof mocks];
 
 export const restaurantsRequest = (
-  location: string = "37.7749295,-122.4194155"
+  location: `${number},${number}` = "37.7749295,-122.4194155"
 ): Promise<RestaurantsResult> => {
   return new Promise((resolve, reject) => {
     const mock = mocks[location as keyof typeof mocks];
@@ -15,8 +15,10 @@ export const restaurantsRequest = (
 
 export const restaurantsTransform = ({ results }: RestaurantsResult) => {
   const mappedResults = camelize(results).map((restaurant) => {
+    const { vicinity, openingHours, businessStatus, ...others } = restaurant;
     return {
-      ...restaurant,
+      ...others,
+      address: vicinity,
       isOpenNow: restaurant.openingHours && restaurant.openingHours.openNow,
       isClosedTemporarily: restaurant.businessStatus === "CLOSED_TEMPORARILY",
       photos: restaurant.photos.map((p) => {
