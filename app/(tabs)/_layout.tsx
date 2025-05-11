@@ -28,10 +28,11 @@ export default function TabsLayout() {
   return (
     <TabsStyled>
       <Tabs.Screen
-        name="index"
+        name="(restaurants)"
         options={{
           title: "Restaurant",
           tabBarIcon: tabBarIcon("restaurant-sharp"),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -39,6 +40,7 @@ export default function TabsLayout() {
         options={{
           title: "Map",
           tabBarIcon: tabBarIcon("map-outline"),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -46,6 +48,7 @@ export default function TabsLayout() {
         options={{
           title: "Settings",
           tabBarIcon: tabBarIcon("settings"),
+          headerShown: false,
         }}
       />
     </TabsStyled>

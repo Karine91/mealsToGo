@@ -1,4 +1,4 @@
-import { View, SafeAreaView, FlatList } from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 
 import { ActivityIndicator } from "react-native-paper";
 import RestaurantInfoCard from "@/features/restaurants/components/restaurant-info-card/RestaurantInfoCard";
@@ -7,10 +7,7 @@ import { RestaurantsContext } from "@/services/restaurants/restaurants.context";
 import { useContext } from "react";
 import type { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 import Search from "@/features/restaurants/components/Search";
-
-const ContainerView = styled(SafeAreaView)({
-  flex: 1,
-});
+import { useRouter } from "expo-router";
 
 const RestaurantList = styled(FlatList<RestaurantsItem>).attrs({
   contentContainerStyle: { padding: 16, gap: 16 },
@@ -27,11 +24,12 @@ const LoaderWrapper = styled(View)({
   flex: 1,
 });
 
-export default function Index() {
+export default function Restaurants() {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { navigate } = useRouter();
 
   return (
-    <ContainerView>
+    <>
       {isLoading ? (
         <LoaderWrapper>
           <Loader animating={true} size={"large"} />
@@ -42,12 +40,18 @@ export default function Index() {
           <RestaurantList
             data={restaurants}
             renderItem={({ item }) => {
-              return <RestaurantInfoCard restaurant={item} />;
+              return (
+                <TouchableOpacity
+                  onPress={() => navigate("/restaurants-detail")}
+                >
+                  <RestaurantInfoCard restaurant={item} />
+                </TouchableOpacity>
+              );
             }}
             keyExtractor={(item) => item.name}
           />
         </>
       )}
-    </ContainerView>
+    </>
   );
 }

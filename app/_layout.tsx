@@ -30,8 +30,8 @@ export default function RootLayout() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="(tabs)" />
               <Stack.Screen name="+not-found" />
             </Stack>
           </RestaurantsContextProvider>
