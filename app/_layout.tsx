@@ -1,16 +1,15 @@
-import { Stack } from "expo-router";
-import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { ThemeProvider } from "styled-components/native";
-import { theme } from "@/infrastructure/theme";
-
-import { RestaurantsContextProvider } from "@/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "@/services/location/location.context";
-
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import { Stack } from "expo-router";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { ThemeProvider } from "styled-components/native";
+
+import { theme } from "@/infrastructure/theme";
+import { LocationContextProvider } from "@/services/location/location.context";
+import { RestaurantsContextProvider } from "@/services/restaurants/restaurants.context";
 
 export default function RootLayout() {
   const [oswaldLoaded] = useOswald({

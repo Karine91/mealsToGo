@@ -1,10 +1,11 @@
-import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
+
+import { mockImages, mocks } from "./mock";
 
 export type RestaurantsResult = (typeof mocks)[keyof typeof mocks];
 
 export const restaurantsRequest = (
-  location: `${number},${number}` = "37.7749295,-122.4194155"
+  location: `${number},${number}` = "37.7749295,-122.4194155",
 ): Promise<RestaurantsResult> => {
   return new Promise((resolve, reject) => {
     const mock = mocks[location as keyof typeof mocks];

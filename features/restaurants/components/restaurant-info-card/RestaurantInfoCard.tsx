@@ -1,10 +1,10 @@
 import React from "react";
-
 import { SvgXml } from "react-native-svg";
 
-import star from "@/assets/images/star";
 import openIcon from "@/assets/images/open";
+import star from "@/assets/images/star";
 import { Text } from "@/components/Typography";
+import { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
 import {
   CardStyled,
@@ -16,7 +16,6 @@ import {
   Address,
   Icon,
 } from "./styles";
-import { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
 type Props = {
   restaurant: RestaurantsItem;

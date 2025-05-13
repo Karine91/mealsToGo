@@ -1,7 +1,8 @@
-import { View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
+import { View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
+
 import { LocationContext } from "@/services/location/location.context";
 
 const SearchView = styled(View)(({ theme }) => ({

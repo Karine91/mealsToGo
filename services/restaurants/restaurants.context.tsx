@@ -6,13 +6,14 @@ import React, {
   useContext,
 } from "react";
 
+import { LocationContext } from "../location/location.context";
+import type { Location } from "../location/location.service";
+
 import {
   restaurantsRequest,
   restaurantsTransform,
   type RestaurantsItem,
 } from "./restaurants.service";
-import { LocationContext } from "../location/location.context";
-import type { Location } from "../location/location.service";
 
 export const RestaurantsContext = createContext({
   restaurants: [] as RestaurantsItem[],

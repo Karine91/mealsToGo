@@ -1,6 +1,6 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
 import styled from "styled-components/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const TabsStyled = styled(Tabs).attrs(({ theme }) => ({
   screenOptions: {

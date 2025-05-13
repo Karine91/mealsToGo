@@ -1,13 +1,13 @@
-import { View, FlatList, TouchableOpacity } from "react-native";
-
-import { ActivityIndicator } from "react-native-paper";
-import RestaurantInfoCard from "@/features/restaurants/components/restaurant-info-card/RestaurantInfoCard";
-import styled from "styled-components/native";
-import { RestaurantsContext } from "@/services/restaurants/restaurants.context";
-import { useContext } from "react";
-import type { RestaurantsItem } from "@/services/restaurants/restaurants.service";
-import Search from "@/features/restaurants/components/Search";
 import { useRouter } from "expo-router";
+import { useContext } from "react";
+import { View, FlatList, TouchableOpacity } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
+import styled from "styled-components/native";
+
+import RestaurantInfoCard from "@/features/restaurants/components/restaurant-info-card/RestaurantInfoCard";
+import Search from "@/features/restaurants/components/Search";
+import { RestaurantsContext } from "@/services/restaurants/restaurants.context";
+import type { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
 const RestaurantList = styled(FlatList<RestaurantsItem>).attrs({
   contentContainerStyle: { padding: 16, gap: 16 },
@@ -42,7 +42,12 @@ export default function Restaurants() {
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
-                  onPress={() => navigate("/restaurants-detail")}
+                  onPress={() =>
+                    navigate({
+                      pathname: "/(tabs)/(restaurants)/[id]",
+                      params: { id: item.placeId },
+                    })
+                  }
                 >
                   <RestaurantInfoCard restaurant={item} />
                 </TouchableOpacity>

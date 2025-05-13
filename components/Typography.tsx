@@ -1,6 +1,6 @@
-import styled, { CSSProperties, DefaultTheme } from "styled-components/native";
-import { Text as NativeText } from "react-native";
 import { ComponentProps } from "react";
+import { Text as NativeText } from "react-native";
+import styled, { CSSProperties, DefaultTheme } from "styled-components/native";
 
 type StyleDef = (theme: DefaultTheme) => CSSProperties;
 

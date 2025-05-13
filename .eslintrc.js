@@ -1,7 +1,31 @@
 module.exports = {
   extends: ["expo", "prettier"],
-  plugins: ["prettier"],
+  ignorePatterns: ["/dist/*"],
   rules: {
-    "prettier/prettier": "error",
+    "import/no-cycle": "error",
+    "import/order": [
+      "error",
+      {
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+        ],
+        "newlines-between": "always",
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+      },
+    ],
   },
+  overrides: [
+    {
+      files: ["*.{ts,tsx}"],
+    },
+  ],
 };

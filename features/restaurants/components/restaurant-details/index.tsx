@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const Maps = () => {
+const RestaurantDetails = () => {
   return (
     <View>
-      <Text>Maps</Text>
+      <Text>RestaurantDetails</Text>
     </View>
   );
 };
 
-export default Maps;
+export default RestaurantDetails;

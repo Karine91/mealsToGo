@@ -1,6 +1,7 @@
-import { Card } from "react-native-paper";
 import { View, Image } from "react-native";
+import { Card } from "react-native-paper";
 import styled from "styled-components/native";
+
 import { Text } from "@/components/Typography";
 
 export const CardStyled = styled(Card)(({ theme }) => ({
