@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 const TabsStyled = styled(Tabs).attrs(({ theme }) => ({
   screenOptions: {
-    tabBarActiveTintColor: theme.colors.brand.primary,
+    tabBarActiveTintColor: theme.colors.primary,
   },
 }))``;
 

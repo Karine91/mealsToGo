@@ -1,14 +1,23 @@
+import { MD3LightTheme as DefaultThemeRP } from "react-native-paper";
+
 import { colors } from "./colors";
 import { fonts, fontWeights, fontSizes } from "./fonts";
 import { sizes } from "./sizes";
 import { space, lineHeights } from "./spacings";
 
 export const theme = {
-  colors,
+  ...DefaultThemeRP,
+  colors: {
+    ...DefaultThemeRP.colors,
+    ...colors,
+  },
   space,
   lineHeights,
   sizes,
-  fonts,
+  fonts: {
+    ...DefaultThemeRP.fonts,
+    ...fonts,
+  },
   fontSizes,
   fontWeights,
 };
