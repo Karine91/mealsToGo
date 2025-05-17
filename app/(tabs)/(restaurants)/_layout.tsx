@@ -1,20 +1,16 @@
 import { Stack } from "expo-router";
 import React from "react";
-import { SafeAreaView } from "react-native";
-import styled from "styled-components/native";
 
-const SafeAreaVContainerView = styled(SafeAreaView)({
-  flex: 1,
-});
+import { SafeAreaContainerView } from "@/components/SafeAreaContainer";
 
 const RestaurantsStack = () => {
   return (
-    <SafeAreaVContainerView>
+    <SafeAreaContainerView>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="[id]" options={{ presentation: "modal" }} />
       </Stack>
-    </SafeAreaVContainerView>
+    </SafeAreaContainerView>
   );
 };
 

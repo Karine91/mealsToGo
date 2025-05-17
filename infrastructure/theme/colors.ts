@@ -4,6 +4,16 @@ export const colors = {
   tertiary: "#C6DAF7",
   error: "#D0421B",
   background: "#FFFFFF",
+  surface: "red",
+  tertiaryContainer: "red",
+  elevation: {
+    level0: "transparent",
+    level1: "rgb(242, 243, 245)",
+    level2: "rgb(244, 246, 250)",
+    level3: "rgb(242, 245, 248)",
+    level4: "rgb(230, 229, 245)",
+    level5: "rgb(226, 226, 243)",
+  },
   ui: {
     primary: "#262626",
     secondary: "#757575",

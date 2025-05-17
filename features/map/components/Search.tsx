@@ -7,7 +7,10 @@ import { LocationContext } from "@/services/location/location.context";
 
 const SearchView = styled(View)(({ theme }) => ({
   padding: theme.space[3],
-  backgroundColor: theme.colors.bg.primary,
+  position: "absolute",
+  zIndex: 999,
+  top: 20,
+  width: "100%",
 }));
 
 const Search = () => {
@@ -22,6 +25,7 @@ const Search = () => {
     <SearchView>
       <Searchbar
         placeholder="Search for a location"
+        icon="map"
         value={searchKeyword}
         onSubmitEditing={() => {
           search(searchKeyword);

@@ -31,7 +31,7 @@ export default function TabsLayout() {
         name="(restaurants)"
         options={{
           title: "Restaurant",
-          tabBarIcon: tabBarIcon("restaurant-sharp"),
+          tabBarIcon: tabBarIcon(TAB_ICON.RESTAURANT),
           headerShown: false,
         }}
       />
@@ -39,7 +39,7 @@ export default function TabsLayout() {
         name="map"
         options={{
           title: "Map",
-          tabBarIcon: tabBarIcon("map-outline"),
+          tabBarIcon: tabBarIcon(TAB_ICON.MAP),
           headerShown: false,
         }}
       />
@@ -47,7 +47,7 @@ export default function TabsLayout() {
         name="settings"
         options={{
           title: "Settings",
-          tabBarIcon: tabBarIcon("settings"),
+          tabBarIcon: tabBarIcon(TAB_ICON.SETTINGS),
           headerShown: false,
         }}
       />
