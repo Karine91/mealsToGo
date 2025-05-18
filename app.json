@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "meals_to_go",
-    "slug": "meals_to_go",
-    "version": "0.0.1",
+    "name": "meals-to-go",
+    "slug": "meals-to-go",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "mealstogo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
