@@ -9,6 +9,7 @@ import { PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "styled-components/native";
 
 import { theme } from "@/infrastructure/theme";
+import { FavoritesContextProvider } from "@/services/favorites/favorites.context";
 import { LocationContextProvider } from "@/services/location/location.context";
 import { RestaurantsContextProvider } from "@/services/restaurants/restaurants.context";
 
@@ -29,14 +30,16 @@ export default function RootLayout() {
     <>
       <PaperProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="(tabs)" />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
+          <FavoritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Stack screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="(tabs)" />
+                  <Stack.Screen name="+not-found" />
+                </Stack>
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavoritesContextProvider>
         </ThemeProvider>
       </PaperProvider>
 

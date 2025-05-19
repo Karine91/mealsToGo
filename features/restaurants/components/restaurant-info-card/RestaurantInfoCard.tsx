@@ -3,6 +3,7 @@ import { SvgXml } from "react-native-svg";
 
 import openIcon from "@/assets/images/open";
 import star from "@/assets/images/star";
+import Favorite from "@/components/favorites/Favorite";
 import { Text } from "@/components/Typography";
 import { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
@@ -37,6 +38,7 @@ const RestaurantInfoCard = ({ restaurant }: Props) => {
 
   return (
     <CardStyled elevation={5}>
+      <Favorite restaurant={restaurant} />
       <CardCover key={name} source={{ uri: photos[0] as string }} />
       <Info>
         <Text variant="label">{name}</Text>

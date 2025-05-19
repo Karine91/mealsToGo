@@ -10,7 +10,12 @@ const SearchView = styled(View)(({ theme }) => ({
   backgroundColor: theme.colors.bg.primary,
 }));
 
-const Search = () => {
+type SearchProp = {
+  showFavorites: boolean;
+  onFavToggle: () => void;
+};
+
+const Search = ({ showFavorites, onFavToggle }: SearchProp) => {
   const { keyword, search, location } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -21,6 +26,8 @@ const Search = () => {
   return (
     <SearchView>
       <Searchbar
+        icon={showFavorites ? "heart" : "heart-outline"}
+        onIconPress={onFavToggle}
         placeholder="Search for a location"
         value={searchKeyword}
         onSubmitEditing={() => {
