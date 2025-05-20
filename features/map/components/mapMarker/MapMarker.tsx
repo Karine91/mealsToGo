@@ -33,7 +33,7 @@ const MapMarker = ({ restaurant }: MapMarkerProps) => {
           })
         }
       >
-        <RestaurantCompactInfo restaurant={restaurant} />
+        <RestaurantCompactInfo isMap restaurant={restaurant} />
       </MapCallout>
     </Marker>
   );

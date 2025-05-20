@@ -1,6 +1,6 @@
-import { Redirect, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import styled from "styled-components/native";
 
 import RestaurantDetails from "@/features/restaurants/components/restaurant-details";
@@ -17,7 +17,11 @@ const RestaurantsDetail = () => {
   const restaurant = useRestaurant(id as string);
 
   if (!restaurant) {
-    return <Redirect href="/+not-found" />;
+    return (
+      <ScreenView style={{ alignItems: "center", justifyContent: "center" }}>
+        <Text>Restaurant not found</Text>
+      </ScreenView>
+    );
   }
 
   return (
