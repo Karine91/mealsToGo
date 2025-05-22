@@ -28,7 +28,7 @@ const MapMarker = ({ restaurant }: MapMarkerProps) => {
       <MapCallout
         onPress={() =>
           router.navigate({
-            pathname: "/(tabs)/(restaurants)/[id]",
+            pathname: "/private/(tabs)/(restaurants)/[id]",
             params: { id: restaurant.placeId },
           })
         }

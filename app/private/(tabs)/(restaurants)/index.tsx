@@ -35,7 +35,7 @@ export default function Restaurants() {
 
   const navigateToRestaurantsDetail = (item: RestaurantsItem) => {
     navigate({
-      pathname: "/(tabs)/(restaurants)/[id]",
+      pathname: "/private/(tabs)/(restaurants)/[id]",
       params: { id: item.placeId },
     });
   };

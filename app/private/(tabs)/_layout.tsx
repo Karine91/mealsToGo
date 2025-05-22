@@ -18,11 +18,12 @@ type TabIconProps = {
   name: (typeof TAB_ICON)[keyof typeof TAB_ICON];
 };
 
-const tabBarIcon =
-  (name: TabIconProps["name"]) =>
-  ({ color }: { color: string }) => (
-    <Ionicons name={name} size={24} color={color} />
-  );
+const tabBarIcon = (name: TabIconProps["name"]) => {
+  function TabBarIconComponent({ color }: { color: string }) {
+    return <Ionicons name={name} size={24} color={color} />;
+  }
+  return TabBarIconComponent;
+};
 
 export default function TabsLayout() {
   return (
