@@ -28,8 +28,10 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
     try {
       setIsLoading(true);
       const user = await login(email, password);
+      console.log({ user });
       setUser(user);
     } catch (error: any) {
+      console.log(error);
       setError(error.message);
     } finally {
       setIsLoading(false);

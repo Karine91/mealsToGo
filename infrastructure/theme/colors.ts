@@ -1,18 +1,34 @@
 export const colors = {
   primary: "#2182BD",
+  // primaryContainer: "red",
+  // onPrimary: "red",
+  // onPrimaryContainer: "red",
+
   secondary: "#5282BD",
+  // secondaryContainer: "red",
+  // onSecondary: "red",
+  // onSecondaryContainer: "red",
+
   tertiary: "#C6DAF7",
+  // tertiaryContainer: "red",
+  // onTertiary: "red",
+  // onTertiaryContainer: "red",
+
   error: "#D0421B",
+
   background: "#FFFFFF",
-  surface: "red",
-  tertiaryContainer: "red",
+  // onBackground: "red",
+  // surface: "red",
+  // onSurface: "red",
+  surfaceVariant: "rgb(226, 239, 247)",
+
   elevation: {
     level0: "transparent",
-    level1: "rgb(242, 243, 245)",
-    level2: "rgb(244, 246, 250)",
-    level3: "rgb(242, 245, 248)",
-    level4: "rgb(230, 229, 245)",
-    level5: "rgb(226, 226, 243)",
+    level1: "rgba(255, 255, 255, 0.95)",
+    level2: "rgba(255, 255, 255, 0.80)",
+    level3: "rgba(255, 255, 255, 0.70)",
+    level4: "rgba(255, 255, 255, 0.50)",
+    level5: "rgba(255, 255, 255, 0.30)",
   },
   ui: {
     primary: "#262626",

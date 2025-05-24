@@ -1,13 +1,16 @@
 import React from "react";
-import { Text } from "react-native";
 
 import { SafeAreaContainerView } from "@/components/SafeAreaContainer";
+import AccountImageBg from "@/features/account/components/AccountImageBg/AccountImageBg";
+import LoginForm from "@/features/account/components/LoginForm/LoginForm";
 
 const Login = () => {
   return (
-    <SafeAreaContainerView>
-      <Text>Login</Text>
-    </SafeAreaContainerView>
+    <AccountImageBg>
+      <SafeAreaContainerView>
+        <LoginForm />
+      </SafeAreaContainerView>
+    </AccountImageBg>
   );
 };
 

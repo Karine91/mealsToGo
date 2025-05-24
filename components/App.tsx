@@ -5,6 +5,7 @@ import { AuthContext } from "@/services/auth/auth.context";
 
 const App = () => {
   const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={!isAuthenticated}>

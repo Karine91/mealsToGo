@@ -1,9 +1,17 @@
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp, getApps } from "firebase/app";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  getReactNativePersistence,
+  initializeAuth,
+  Persistence,
 } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+declare module "firebase/auth" {
+  export function getReactNativePersistence(
+    storage: typeof ReactNativeAsyncStorage
+  ): Persistence;
+}
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
@@ -14,15 +22,23 @@ const firebaseConfig = {
   appId: process.env.EXPO_PUBLIC_APP_ID,
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+function init() {
+  const app = initializeApp(firebaseConfig);
+  const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+  });
 
-export const login = (email: string, password: string) => {
-  const auth = getAuth(app);
-  return signInWithEmailAndPassword(auth, email, password).then(
-    (userCredential) => {
-      // Signed up
-      const user = userCredential.user;
-      return user;
-    }
-  );
+  return {
+    app,
+    auth,
+  };
+}
+
+export const { app, auth } = !getApps().length
+  ? init()
+  : { app: getApps()[0], auth: getAuth(getApps()[0]) };
+
+export const login = async (email: string, password: string) => {
+  const { user } = await signInWithEmailAndPassword(auth, email, password);
+  return user;
 };

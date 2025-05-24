@@ -2,7 +2,12 @@ import { ComponentProps } from "react";
 import { Text as NativeText } from "react-native";
 import styled, { CSSProperties, DefaultTheme } from "styled-components/native";
 
-type StyleDef = (theme: DefaultTheme) => CSSProperties;
+import { fontSizes } from "@/infrastructure/theme/fonts";
+
+type StyleDef = (
+  theme: DefaultTheme,
+  headingSize?: HeadingSize
+) => CSSProperties;
 
 const defaultTextStyles: StyleDef = (theme) => ({
   fontFamily: theme.fonts.body,
@@ -36,22 +41,34 @@ const label: StyleDef = (theme) => ({
   fontWeight: theme.fontWeights.medium,
 });
 
+const heading: StyleDef = (theme, headingSize = "h4") => ({
+  fontSize: theme.fontSizes[headingSize],
+  fontFamily: theme.fonts.heading,
+  fontWeight: theme.fontWeights.medium,
+});
+
 const variants = {
   body,
   label,
   caption,
   error,
   hint,
+  heading,
 };
+
+type HeadingSize = Extract<keyof typeof fontSizes, `h${number}`>;
 
 const TextComponent = ({
   variant,
   ...props
-}: ComponentProps<typeof NativeText> & { variant?: keyof typeof variants }) => (
-  <NativeText {...props} />
-);
+}: ComponentProps<typeof NativeText> & {
+  variant?: keyof typeof variants;
+  headingSize?: HeadingSize;
+}) => <NativeText {...props} />;
 
-export const Text = styled(TextComponent)(({ theme, variant = "body" }) => ({
-  ...defaultTextStyles(theme),
-  ...variants[variant](theme),
-}));
+export const Text = styled(TextComponent)(
+  ({ theme, variant = "body", headingSize }) => ({
+    ...defaultTextStyles(theme),
+    ...variants[variant](theme, headingSize),
+  })
+);
