@@ -19,7 +19,7 @@ type FormData = {
 };
 
 const LoginForm = () => {
-  const { onLogin, isLoading } = useContext(AuthContext);
+  const { onLogin, isLoading, error } = useContext(AuthContext);
   const {
     control,
     handleSubmit,
@@ -43,6 +43,7 @@ const LoginForm = () => {
           Login
         </Text>
         <InputsWrapper>
+          {error && <HelperTextStyled type="error">{error}</HelperTextStyled>}
           <Controller
             control={control}
             rules={{

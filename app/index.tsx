@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { Button } from "react-native-paper";
 import styled from "styled-components/native";
 
+import { Text } from "@/components/Typography";
 import AccountImageBg from "@/features/account/components/AccountImageBg/AccountImageBg";
 
 export const AccountContainer = styled(View)(({ theme }) => ({
@@ -30,6 +31,7 @@ const Account = () => {
 
   return (
     <AccountImageBg>
+      <Text variant="heading">Meals To Go</Text>
       <AccountContainer>
         <AuthButton
           mode="contained"

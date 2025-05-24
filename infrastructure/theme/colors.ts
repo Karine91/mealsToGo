@@ -5,7 +5,7 @@ export const colors = {
   // onPrimaryContainer: "red",
 
   secondary: "#5282BD",
-  // secondaryContainer: "red",
+  secondaryContainer: "hsl(213, 40%, 80%)",
   // onSecondary: "red",
   // onSecondaryContainer: "red",
 

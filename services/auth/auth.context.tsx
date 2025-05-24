@@ -21,18 +21,18 @@ export const AuthContext = createContext<AuthContextValue>({
 
 export const AuthContextProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const onLogin = async (email: string, password: string) => {
     try {
       setIsLoading(true);
+      setError(null);
       const user = await login(email, password);
-      console.log({ user });
       setUser(user);
     } catch (error: any) {
       console.log(error);
-      setError(error.message);
+      setError("Authentication error.");
     } finally {
       setIsLoading(false);
     }
