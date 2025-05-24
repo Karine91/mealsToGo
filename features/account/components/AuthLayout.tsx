@@ -1,15 +1,28 @@
 import { PropsWithChildren } from "react";
 
 import { SafeAreaContainerView } from "@/components/SafeAreaContainer";
+import { Text } from "@/components/Typography";
 import AccountContainer from "@/features/account/components/AccountContainer/AccountContainer";
 import BackBtn from "@/features/account/components/BackBtn";
 
-const AuthLayout = ({ children }: PropsWithChildren) => {
+import { PageContainer, LoginFormContainer } from "./form.styles";
+
+const AuthLayout = ({
+  children,
+  title,
+}: PropsWithChildren & { title: string }) => {
   return (
     <AccountContainer>
       <SafeAreaContainerView>
         <BackBtn />
-        {children}
+        <PageContainer>
+          <LoginFormContainer>
+            <Text variant="heading" headingSize="h4">
+              {title}
+            </Text>
+            {children}
+          </LoginFormContainer>
+        </PageContainer>
       </SafeAreaContainerView>
     </AccountContainer>
   );
