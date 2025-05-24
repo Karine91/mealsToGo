@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { Button, HelperText } from "react-native-paper";
 import styled from "styled-components/native";
 
-export const LoginContainer = styled(View)(({ theme }) => ({
+export const PageContainer = styled(View)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flex: 1,
@@ -24,7 +24,7 @@ export const InputsWrapper = styled(View)(({ theme }) => ({
   width: "100%",
 }));
 
-export const LoginButton = styled(Button).attrs(({ theme }) => ({
+export const FormButton = styled(Button).attrs(({ theme }) => ({
   color: theme.colors.primary,
   contentStyle: {
     padding: theme.space[2],

@@ -10,8 +10,7 @@ const App = () => {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={!isAuthenticated}>
         <Stack.Screen name="index" />
-        <Stack.Screen name="login" />
-        <Stack.Screen name="register" />
+        <Stack.Screen name="(auth)" />
       </Stack.Protected>
 
       <Stack.Protected guard={isAuthenticated}>

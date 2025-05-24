@@ -6,41 +6,44 @@ import { Text } from "@/components/Typography";
 import { AuthContext } from "@/services/auth/auth.context";
 
 import {
-  LoginContainer,
+  PageContainer,
   LoginFormContainer,
   InputsWrapper,
-  LoginButton,
+  FormButton,
   HelperTextStyled,
-} from "./styles";
+} from "./form.styles";
 
 type FormData = {
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
-const LoginForm = () => {
-  const { onLogin, isLoading, error } = useContext(AuthContext);
+const RegisterForm = () => {
+  const { onSignUp, isLoading, error } = useContext(AuthContext);
   const {
     control,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm<FormData>({
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    onLogin(data.email.trim(), data.password.trim());
+    onSignUp(data.email.trim(), data.password.trim());
   };
 
   return (
-    <LoginContainer>
+    <PageContainer>
       <LoginFormContainer>
         <Text variant="heading" headingSize="h4">
-          Login
+          Sign Up
         </Text>
         <InputsWrapper>
           {error && <HelperTextStyled type="error">{error}</HelperTextStyled>}
@@ -100,18 +103,58 @@ const LoginForm = () => {
               {errors.password.message}
             </HelperTextStyled>
           )}
+
+          <Controller
+            control={control}
+            rules={{
+              required: "Password is required!",
+              validate: {
+                matchPassword: (v) => {
+                  const values = getValues();
+                  console.log(values.password);
+                  return v === values.password;
+                },
+              },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                label="Confirm password"
+                textContentType="password"
+                autoCapitalize="none"
+                secureTextEntry
+                autoCorrect={false}
+                onBlur={onBlur}
+                value={value}
+                onChangeText={onChange}
+                error={!!errors.confirmPassword}
+              />
+            )}
+            name="confirmPassword"
+          />
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === "required" && (
+              <HelperTextStyled type="error">
+                {errors.confirmPassword.message}
+              </HelperTextStyled>
+            )}
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === "matchPassword" && (
+              <HelperTextStyled type="error">
+                Passwords do not match.
+              </HelperTextStyled>
+            )}
         </InputsWrapper>
-        <LoginButton
+        <FormButton
           onPress={handleSubmit(onSubmit)}
           loading={isLoading}
           mode="contained"
-          icon="lock-open-outline"
+          icon="email-outline"
         >
-          Login
-        </LoginButton>
+          sign up
+        </FormButton>
       </LoginFormContainer>
-    </LoginContainer>
+    </PageContainer>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

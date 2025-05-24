@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 
 import { AccountCover, BackgroundImageCover } from "./styles";
 
-const AccountImageBg = ({ children }: PropsWithChildren) => {
+const AccountContainer = ({ children }: PropsWithChildren) => {
   return (
     <BackgroundImageCover>
       <AccountCover />
@@ -11,4 +11,4 @@ const AccountImageBg = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default AccountImageBg;
+export default AccountContainer;
