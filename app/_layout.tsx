@@ -10,9 +10,6 @@ import { ThemeProvider } from "styled-components/native";
 import App from "@/components/App";
 import { theme } from "@/infrastructure/theme";
 import { AuthContextProvider } from "@/services/auth/auth.context";
-import { FavoritesContextProvider } from "@/services/favorites/favorites.context";
-import { LocationContextProvider } from "@/services/location/location.context";
-import { RestaurantsContextProvider } from "@/services/restaurants/restaurants.context";
 
 export default function RootLayout() {
   const [oswaldLoaded] = useOswald({
@@ -32,13 +29,7 @@ export default function RootLayout() {
       <PaperProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AuthContextProvider>
-            <FavoritesContextProvider>
-              <LocationContextProvider>
-                <RestaurantsContextProvider>
-                  <App />
-                </RestaurantsContextProvider>
-              </LocationContextProvider>
-            </FavoritesContextProvider>
+            <App />
           </AuthContextProvider>
         </ThemeProvider>
       </PaperProvider>

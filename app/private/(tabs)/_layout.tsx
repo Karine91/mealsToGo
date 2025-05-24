@@ -2,6 +2,10 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
 import styled from "styled-components/native";
 
+import { FavoritesContextProvider } from "@/services/favorites/favorites.context";
+import { LocationContextProvider } from "@/services/location/location.context";
+import { RestaurantsContextProvider } from "@/services/restaurants/restaurants.context";
+
 const TabsStyled = styled(Tabs).attrs(({ theme }) => ({
   screenOptions: {
     tabBarActiveTintColor: theme.colors.primary,
@@ -27,31 +31,37 @@ const tabBarIcon = (name: TabIconProps["name"]) => {
 
 export default function TabsLayout() {
   return (
-    <TabsStyled>
-      <Tabs.Screen
-        name="(restaurants)"
-        options={{
-          title: "Restaurant",
-          tabBarIcon: tabBarIcon(TAB_ICON.RESTAURANT),
-          headerShown: false,
-        }}
-      />
-      <Tabs.Screen
-        name="map"
-        options={{
-          title: "Map",
-          tabBarIcon: tabBarIcon(TAB_ICON.MAP),
-          headerShown: false,
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarIcon: tabBarIcon(TAB_ICON.SETTINGS),
-          headerShown: false,
-        }}
-      />
-    </TabsStyled>
+    <FavoritesContextProvider>
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <TabsStyled>
+            <Tabs.Screen
+              name="(restaurants)"
+              options={{
+                title: "Restaurant",
+                tabBarIcon: tabBarIcon(TAB_ICON.RESTAURANT),
+                headerShown: false,
+              }}
+            />
+            <Tabs.Screen
+              name="map"
+              options={{
+                title: "Map",
+                tabBarIcon: tabBarIcon(TAB_ICON.MAP),
+                headerShown: false,
+              }}
+            />
+            <Tabs.Screen
+              name="settings"
+              options={{
+                title: "Settings",
+                tabBarIcon: tabBarIcon(TAB_ICON.SETTINGS),
+                headerShown: false,
+              }}
+            />
+          </TabsStyled>
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
+    </FavoritesContextProvider>
   );
 }

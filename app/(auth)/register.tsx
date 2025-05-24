@@ -1,14 +1,9 @@
 import React from "react";
 
-import AuthLayout from "@/features/account/components/AuthLayout";
 import RegisterForm from "@/features/account/components/RegisterForm";
 
 const Register = () => {
-  return (
-    <AuthLayout>
-      <RegisterForm />
-    </AuthLayout>
-  );
+  return <RegisterForm />;
 };
 
 export default Register;
