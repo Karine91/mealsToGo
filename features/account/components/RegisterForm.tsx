@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput } from "react-native-paper";
 
-import { Text } from "@/components/Typography";
 import { AuthContext } from "@/services/auth/auth.context";
 
 import { InputsWrapper, FormButton, HelperTextStyled } from "./form.styles";
@@ -101,7 +100,6 @@ const RegisterForm = () => {
             validate: {
               matchPassword: (v) => {
                 const values = getValues();
-                console.log(values.password);
                 return v === values.password;
               },
             },

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput } from "react-native-paper";
 
-import { Text } from "@/components/Typography";
 import { AuthContext } from "@/services/auth/auth.context";
 
 import { InputsWrapper, FormButton, HelperTextStyled } from "./form.styles";
@@ -94,6 +93,7 @@ const LoginForm = () => {
       <FormButton
         onPress={handleSubmit(onSubmit)}
         loading={isLoading}
+        disabled={isLoading}
         mode="contained"
         icon="lock-open-outline"
       >

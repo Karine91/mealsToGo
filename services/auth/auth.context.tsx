@@ -1,9 +1,8 @@
-import { useRoute } from "@react-navigation/native";
 import { useSegments } from "expo-router";
-import type { User } from "firebase/auth";
+import { type User } from "firebase/auth";
 import { createContext, useState, PropsWithChildren, useEffect } from "react";
 
-import { login, signUp } from "./auth.service";
+import { login, signUp, onAuthStateChange, logout } from "./auth.service";
 
 type AuthContextValue = {
   user: User | null;
@@ -12,6 +11,7 @@ type AuthContextValue = {
   error: null | string;
   onLogin: (email: string, password: string) => void;
   onSignUp: (email: string, password: string) => void;
+  onLogout: () => void;
 };
 
 export const AuthContext = createContext<AuthContextValue>({
@@ -21,6 +21,7 @@ export const AuthContext = createContext<AuthContextValue>({
   error: null,
   onLogin: () => {},
   onSignUp: () => {},
+  onLogout: () => {},
 });
 
 export const AuthContextProvider = ({ children }: PropsWithChildren) => {
@@ -30,14 +31,23 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
   const segments = useSegments();
 
   useEffect(() => {
+    onAuthStateChange((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     setError(null);
   }, [segments]);
 
   const onLogin = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      const user = await login(email, password);
-      setUser(user);
+      await login(email, password);
     } catch (error: any) {
       console.log(error);
       setError("Authentication error.");
@@ -49,8 +59,7 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
   const onSignUp = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      const user = await signUp(email, password);
-      setUser(user);
+      await signUp(email, password);
     } catch (error: any) {
       console.log(error.message);
       setError("Authentication error.");
@@ -68,6 +77,7 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
         onLogin,
         onSignUp,
         isAuthenticated: Boolean(user),
+        onLogout: logout,
       }}
     >
       {children}

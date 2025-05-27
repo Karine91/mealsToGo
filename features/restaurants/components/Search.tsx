@@ -7,7 +7,7 @@ import { LocationContext } from "@/services/location/location.context";
 
 const SearchView = styled(View)(({ theme }) => ({
   padding: theme.space[3],
-  backgroundColor: theme.colors.bg.primary,
+  backgroundColor: theme.colors.bg.secondary,
 }));
 
 type SearchProp = {
@@ -16,7 +16,7 @@ type SearchProp = {
 };
 
 const Search = ({ showFavorites, onFavToggle }: SearchProp) => {
-  const { keyword, search, location } = useContext(LocationContext);
+  const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
   useEffect(() => {

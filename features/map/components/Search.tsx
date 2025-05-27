@@ -14,7 +14,7 @@ const SearchView = styled(View)(({ theme }) => ({
 }));
 
 const Search = () => {
-  const { keyword, search, location } = useContext(LocationContext);
+  const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
   useEffect(() => {

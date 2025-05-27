@@ -1,14 +1,15 @@
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp, getApps } from "firebase/app";
 import {
-  getReactNativePersistence,
-  initializeAuth,
-  Persistence,
-} from "firebase/auth";
-import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  getReactNativePersistence,
+  initializeAuth,
+  Persistence,
+  NextOrObserver,
+  User,
 } from "firebase/auth";
 
 declare module "firebase/auth" {
@@ -50,4 +51,12 @@ export const login = async (email: string, password: string) => {
 export const signUp = async (email: string, password: string) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   return user;
+};
+
+export const onAuthStateChange = (cb: NextOrObserver<User>) => {
+  onAuthStateChanged(auth, cb);
+};
+
+export const logout = () => {
+  auth.signOut();
 };

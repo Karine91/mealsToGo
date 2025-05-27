@@ -2,10 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {
   createContext,
   PropsWithChildren,
+  useContext,
   useEffect,
   useState,
 } from "react";
 
+import { AuthContext } from "../auth/auth.context";
 import { RestaurantsItem } from "../restaurants/restaurants.service";
 
 export type FavoritesContextValue = {
@@ -22,27 +24,27 @@ export const FavoritesContext = createContext<FavoritesContextValue>({
 
 export const FavoritesContextProvider = ({ children }: PropsWithChildren) => {
   const [favorites, setFavorites] = useState<RestaurantsItem[]>([]);
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    getFavorites().then((data) => data && setFavorites(data));
-  }, []);
+  const STORAGE_KEY = `@favorites-${user!.uid}`;
 
-  useEffect(() => {
-    saveFavorites(favorites);
-  }, [favorites]);
-
-  const saveFavorites = async (value: RestaurantsItem[]) => {
+  const handleSetFavorites = (newFavorites: RestaurantsItem[]) => {
+    setFavorites(newFavorites);
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@favorites", jsonValue);
+      const jsonValue = JSON.stringify(newFavorites);
+      AsyncStorage.setItem(STORAGE_KEY, jsonValue);
     } catch (e) {
       console.log(e);
     }
   };
 
+  useEffect(() => {
+    getFavorites().then((data) => data && handleSetFavorites(data));
+  }, []);
+
   const getFavorites = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("@favorites");
+      const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
       return jsonValue != null
         ? (JSON.parse(jsonValue) as RestaurantsItem[])
         : null;
@@ -52,11 +54,11 @@ export const FavoritesContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const addToFavorites = (restaurant: RestaurantsItem) => {
-    setFavorites((state) => [...state, restaurant]);
+    handleSetFavorites([...favorites, restaurant]);
   };
 
   const removeFromFavorites = (id: string) => {
-    setFavorites((state) => state.filter((item) => item.placeId !== id));
+    handleSetFavorites(favorites.filter((item) => item.placeId !== id));
   };
 
   return (
