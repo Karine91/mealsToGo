@@ -1,6 +1,5 @@
 import { useRouter } from "expo-router";
 import React from "react";
-
 import { AccountContainer, AuthButton } from "./styles";
 
 const Account = () => {
