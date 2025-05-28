@@ -10,10 +10,10 @@ export const CardStyled = styled(Card)(({ theme }) => ({
 
 export const CardCover = styled(Card.Cover)(({ theme }) => ({
   padding: 20,
-  backgroundColor: theme.colors.bg.primary,
+  backgroundColor: "transparent",
 }));
 
-export const Info = styled(View)(({ theme }) => ({
+export const Info = styled(Card.Content)(({ theme }) => ({
   padding: theme.space[3],
 }));
 

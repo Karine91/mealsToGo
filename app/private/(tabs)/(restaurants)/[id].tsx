@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, Stack } from "expo-router";
 import React from "react";
 import { View, Text } from "react-native";
 import styled from "styled-components/native";
@@ -19,6 +19,7 @@ const RestaurantsDetail = () => {
   if (!restaurant) {
     return (
       <ScreenView style={{ alignItems: "center", justifyContent: "center" }}>
+        <Stack.Screen options={{ title: "Not found", headerShown: true }} />
         <Text>Restaurant not found</Text>
       </ScreenView>
     );
@@ -26,6 +27,7 @@ const RestaurantsDetail = () => {
 
   return (
     <ScreenView>
+      <Stack.Screen options={{ title: restaurant.name, headerShown: true }} />
       <RestaurantInfoCard restaurant={restaurant} />
       <RestaurantDetails />
     </ScreenView>

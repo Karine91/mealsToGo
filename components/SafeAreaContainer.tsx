@@ -6,5 +6,5 @@ export const SafeAreaContainerView = styled(SafeAreaView)(({ theme }) => ({
   marginTop: StatusBar.currentHeight,
   width: "100%",
   height: "100%",
-  backgroundColor: theme.colors.bg.primary,
+  backgroundColor: "transparent",
 }));

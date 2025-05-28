@@ -13,7 +13,10 @@ const RestaurantsStack = () => {
         }}
       >
         <Stack.Screen name="index" />
-        <Stack.Screen name="[id]" options={{ presentation: "modal" }} />
+        <Stack.Screen
+          name="[id]"
+          options={{ presentation: "modal", headerShown: true }}
+        />
       </Stack>
     </SafeAreaContainerView>
   );

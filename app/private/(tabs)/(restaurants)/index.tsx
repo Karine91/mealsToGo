@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import styled from "styled-components/native";
 
+import { FadeInView } from "@/components/animations/Fade";
 import FavoritesBar from "@/components/favoritesBar/FavoritesBar";
 import RestaurantsList from "@/features/restaurants/components/restaurants-list/RestaurantsList";
 import Search from "@/features/restaurants/components/Search";
@@ -20,6 +21,7 @@ const LoaderWrapper = styled(View)({
   alignItems: "center",
   justifyContent: "center",
   flex: 1,
+  backgroundColor: "none",
 });
 
 export default function Restaurants() {
@@ -53,10 +55,12 @@ export default function Restaurants() {
               onDetail={navigateToRestaurantsDetail}
             />
           )}
-          <RestaurantsList
-            data={restaurants}
-            onItemClick={navigateToRestaurantsDetail}
-          />
+          <FadeInView>
+            <RestaurantsList
+              data={restaurants}
+              onItemClick={navigateToRestaurantsDetail}
+            />
+          </FadeInView>
         </>
       )}
     </>
