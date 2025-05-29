@@ -12,6 +12,7 @@ const Settings = () => {
       >
         <Stack.Screen name="index" options={{ title: "Settings" }} />
         <Stack.Screen name="favorites" options={{ title: "Favorites" }} />
+        <Stack.Screen name="camera" options={{ title: "Camera" }} />
       </Stack>
     </SafeAreaContainerView>
   );

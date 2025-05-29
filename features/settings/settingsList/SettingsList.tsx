@@ -1,5 +1,7 @@
-import { useRouter } from "expo-router";
-import React, { useContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect, useRouter } from "expo-router";
+import React, { useCallback, useContext, useState } from "react";
+import { TouchableOpacity } from "react-native";
 import { List, Avatar } from "react-native-paper";
 
 import { Text } from "@/components/Typography";
@@ -10,11 +12,30 @@ import { SettingsItem, AvatarContainer } from "./styles";
 const SettingsList = () => {
   const router = useRouter();
   const { onLogout, user } = useContext(AuthContext);
+  const [photo, setPhoto] = useState<string | null>(null);
+
+  const getProfilePicture = async () => {
+    const photo = user && (await AsyncStorage.getItem(`${user.uid}-photo`));
+    setPhoto(photo);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      getProfilePicture();
+    }, [])
+  );
 
   return (
     <>
       <AvatarContainer>
-        <Avatar.Icon size={180} icon="human"></Avatar.Icon>
+        <TouchableOpacity
+          onPress={() =>
+            router.navigate({ pathname: "/private/(tabs)/settings/camera" })
+          }
+        >
+          {!photo && <Avatar.Icon size={180} icon="human"></Avatar.Icon>}
+          {photo && <Avatar.Image size={180} source={{ uri: photo }} />}
+        </TouchableOpacity>
         <Text variant="label">{user?.email}</Text>
       </AvatarContainer>
 
