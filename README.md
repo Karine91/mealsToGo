@@ -8,16 +8,16 @@
 
 ## :page_with_curl: About
 
-MealsToGo is an educational project to learn React Native, developed with Expo framework.
-It's an app for food ordering, with ability to search for restaurants, check their details like menu, address, rating, and add restaurants to the favorites.
+MealsToGo is an educational project to learn React Native, developed using the Expo framework.
+It is a food ordering app with the ability to search for restaurants, check their details such as menu, address, rating, and add restaurants to favorites.
 
 ## :diamonds: Core Features
 
-- Authentication with email & password
+- Email and password authentication
 - Search restaurants by location
-- Show restaurants on a map, with ability to search
+- Show restaurants on a map with search option
 - Add restaurants to favorites
-- Add profile picture using device's front camera
+- Add profile photo using the device's front camera
 
 ## :wrench: Core used technologies
 
