@@ -6,6 +6,7 @@ import {
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "styled-components/native";
+import ToastManager from "toastify-react-native";
 
 import App from "@/components/App";
 import { theme } from "@/infrastructure/theme";
@@ -33,7 +34,11 @@ export default function RootLayout() {
           </AuthContextProvider>
         </ThemeProvider>
       </PaperProvider>
-
+      <ToastManager
+        position="bottom"
+        showProgressBar={false}
+        bottomOffset={100}
+      />
       <ExpoStatusBar />
     </>
   );

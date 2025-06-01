@@ -4,6 +4,9 @@ import React, {
   PropsWithChildren,
   useEffect,
 } from "react";
+import { Toast } from "toastify-react-native";
+
+import { colors } from "@/infrastructure/theme/colors";
 
 import {
   locationRequest,
@@ -47,6 +50,14 @@ export const LocationContextProvider = ({ children }: PropsWithChildren) => {
       })
       .catch((err) => {
         setError(err);
+        setLocation(null);
+        Toast.show({
+          type: "error",
+          text1: err,
+          backgroundColor: colors.error,
+          iconColor: colors.bg.primary,
+          textColor: colors.bg.primary,
+        });
       })
       .finally(() => {
         setIsLoading(false);

@@ -5,6 +5,7 @@ import React, {
   PropsWithChildren,
   useContext,
 } from "react";
+import { Toast } from "toastify-react-native";
 
 import { LocationContext } from "../location/location.context";
 import type { Location } from "../location/location.service";
@@ -34,7 +35,9 @@ export const RestaurantsContextProvider = ({ children }: PropsWithChildren) => {
       restaurantsRequest(locationStr)
         .then(restaurantsTransform)
         .then(setRestaurants)
-        .catch(setError)
+        .catch((error) => {
+          setError(error.toString());
+        })
         .finally(() => setIsLoading(false));
     }, 2000);
   }
@@ -42,6 +45,8 @@ export const RestaurantsContextProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (location) {
       retrieveRestaurants(location);
+    } else {
+      setRestaurants([]);
     }
   }, [location]);
 

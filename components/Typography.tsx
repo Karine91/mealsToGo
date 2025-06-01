@@ -1,7 +1,8 @@
 import { ComponentProps } from "react";
-import { Text as NativeText } from "react-native";
+import { Text as NativeText, StyleProp, TextStyle } from "react-native";
 import styled, { CSSProperties, DefaultTheme } from "styled-components/native";
 
+import { Theme, theme } from "@/infrastructure/theme";
 import { fontSizes } from "@/infrastructure/theme/fonts";
 
 type StyleDef = (
@@ -24,6 +25,7 @@ const body: StyleDef = (theme) => ({
 
 const hint: StyleDef = (theme) => ({
   fontSize: theme.fontSizes.body,
+  color: theme.colors.text.secondary,
 });
 
 const error: StyleDef = (theme) => ({
@@ -60,11 +62,18 @@ type HeadingSize = Extract<keyof typeof fontSizes, `h${number}`>;
 
 const TextComponent = ({
   variant,
+  style,
   ...props
-}: ComponentProps<typeof NativeText> & {
+}: Omit<ComponentProps<typeof NativeText>, "style"> & {
   variant?: keyof typeof variants;
   headingSize?: HeadingSize;
-}) => <NativeText {...props} />;
+  style?: ((theme: Theme) => StyleProp<TextStyle>) | StyleProp<TextStyle>;
+}) => (
+  <NativeText
+    {...props}
+    style={typeof style === "function" ? style(theme) : style}
+  />
+);
 
 export const Text = styled(TextComponent)(
   ({ theme, variant = "body", headingSize }) => ({
