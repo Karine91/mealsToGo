@@ -17,6 +17,7 @@ const RestaurantsStack = () => {
           name="[id]"
           options={{ presentation: "modal", headerShown: true }}
         />
+       
       </Stack>
     </SafeAreaContainerView>
   );
