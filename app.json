@@ -5,12 +5,15 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",
-    "scheme": "mealstogo",
+    "scheme": "meals-to-go",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.meals-to-go"
+      "bundleIdentifier": "com.anonymous.mealstogo",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -26,6 +29,7 @@
     },
     "plugins": [
       "expo-router",
+      "@stripe/stripe-react-native",
       [
         "expo-splash-screen",
         {
@@ -39,6 +43,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2c3b2893-cb92-44ad-8776-6e00a3d19cac"
+      }
+    },
+    "owner": "karine91"
   }
 }
