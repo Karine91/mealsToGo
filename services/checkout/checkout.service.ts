@@ -17,3 +17,13 @@ export async function fetchPaymentSheetParams({
     body: JSON.stringify({ amount, customerId }),
   }).then((res) => res.json());
 }
+
+export async function createCustomerRequest({ email }: { email: string }) {
+  return fetch("/api/customer", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  }).then((res) => res.json());
+}

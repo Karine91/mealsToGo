@@ -6,7 +6,7 @@ import { AccordionIcon, AccordionGroup, Accordion } from "./styles";
 
 const RestaurantDetails = () => {
   return (
-    <ScrollView>
+    <ScrollView style={{ height: "100%" }}>
       <AccordionGroup>
         <List.AccordionGroup>
           <Accordion

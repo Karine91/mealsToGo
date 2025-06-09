@@ -1,20 +1,47 @@
 import { useLocalSearchParams, Stack } from "expo-router";
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useContext } from "react";
+import { Text, SafeAreaView, View } from "react-native";
+import { Button } from "react-native-paper";
 import styled from "styled-components/native";
 
 import RestaurantDetails from "@/features/restaurants/components/restaurant-details";
 import RestaurantInfoCard from "@/features/restaurants/components/restaurant-info-card/RestaurantInfoCard";
 import { useRestaurant } from "@/features/restaurants/hooks/useRestaurant";
+import { CartContext } from "@/services/cart/cart.context";
 
-const ScreenView = styled(View)(({ theme }) => ({
+const ScreenView = styled(SafeAreaView)(({ theme }) => ({
   backgroundColor: theme.colors.bg.primary,
   flex: 1,
+}));
+
+const SpecialOrderContainer = styled(View)(({ theme }) => ({
+  padding: theme.space[3],
+  backgroundColor: theme.colors.bg.primary,
+}));
+
+const DetailsContainer = styled(View)(({ theme }) => ({
+  padding: theme.space[3],
+  flex: 2,
+}));
+
+const CartContainer = styled(View)({
+  flex: 2,
+  zIndex: 1,
+});
+
+const SpecialOrderButton = styled(Button).attrs(({ theme }) => ({
+  color: theme.colors.primary,
+}))(({ theme }) => ({
+  width: "80%",
+  padding: theme.space[2],
+  alignSelf: "center",
+  flexShrink: 0,
 }));
 
 const RestaurantsDetail = () => {
   const { id } = useLocalSearchParams();
   const restaurant = useRestaurant(id as string);
+  const { addToCart } = useContext(CartContext);
 
   if (!restaurant) {
     return (
@@ -28,8 +55,29 @@ const RestaurantsDetail = () => {
   return (
     <ScreenView>
       <Stack.Screen options={{ title: restaurant.name, headerShown: true }} />
-      <RestaurantInfoCard restaurant={restaurant} />
-      <RestaurantDetails />
+      <CartContainer>
+        <RestaurantInfoCard restaurant={restaurant} />
+      </CartContainer>
+      <DetailsContainer>
+        <RestaurantDetails />
+      </DetailsContainer>
+      <SpecialOrderContainer>
+        <SpecialOrderButton
+          compact
+          mode="contained"
+          icon="cash-multiple"
+          uppercase
+          onPress={() =>
+            addToCart({
+              item: "special",
+              price: 12.99,
+              restaurantId: restaurant.placeId,
+            })
+          }
+        >
+          Order special only 12.99$!
+        </SpecialOrderButton>
+      </SpecialOrderContainer>
     </ScreenView>
   );
 };
