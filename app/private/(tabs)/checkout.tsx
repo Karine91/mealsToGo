@@ -1,15 +1,12 @@
 import React from "react";
 
 import { SafeAreaContainerView } from "@/components/SafeAreaContainer";
-import CheckoutComponent from "@/features/checkout/components/CheckoutComponent";
-import { CheckoutContextProvider } from "@/services/checkout/checkout.context";
+import CheckoutComponent from "@/features/checkout/components/checkout-component/CheckoutComponent";
 
 const Checkout = () => {
   return (
     <SafeAreaContainerView>
-      <CheckoutContextProvider>
-        <CheckoutComponent />
-      </CheckoutContextProvider>
+      <CheckoutComponent />
     </SafeAreaContainerView>
   );
 };

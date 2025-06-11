@@ -1,15 +1,21 @@
 import { useStripe } from "@stripe/stripe-react-native";
 import * as Linking from "expo-linking";
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, Alert } from "react-native";
-import { Button } from "react-native-paper";
+import { View, Alert, ScrollView } from "react-native";
+import { Button, List } from "react-native-paper";
 
+import { Text } from "@/components/Typography";
+import RestaurantInfoCard from "@/features/restaurants/components/restaurant-info-card/RestaurantInfoCard";
+import { CartContext } from "@/services/cart/cart.context";
 import { CheckoutContext } from "@/services/checkout/checkout.context";
 import { fetchPaymentSheetParams } from "@/services/checkout/checkout.service";
+
+import { NoCartContainer, CartIcon, CheckoutContainer } from "./styles";
 
 const CheckoutComponent = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [isLoading, setIsLoading] = useState(false);
+  const { cart, restaurant, totalPrice } = useContext(CartContext);
 
   const { getCustomerId } = useContext(CheckoutContext);
 
@@ -54,13 +60,33 @@ const CheckoutComponent = () => {
     initializePaymentSheet();
   }, []);
 
+  if (!cart.length || !restaurant) {
+    return (
+      <NoCartContainer>
+        <CartIcon icon="cart-off" />
+        <Text variant="label">Your cart is empty</Text>
+      </NoCartContainer>
+    );
+  }
+
   return (
-    <View>
-      <Text>CheckoutComponent</Text>
-      <Button mode="contained" onPress={openPaymentSheet}>
-        Pay 10$
-      </Button>
-    </View>
+    <CheckoutContainer>
+      <RestaurantInfoCard restaurant={restaurant} />
+      <ScrollView>
+        <Text variant="heading" headingSize="h5">
+          Your order
+        </Text>
+        <List.Section>
+          {cart.map(({ item, price }, ind) => (
+            <List.Item key={ind} title={`${item} - ${price}$`}></List.Item>
+          ))}
+        </List.Section>
+        <Text variant="caption">Total: {totalPrice}$</Text>
+        <Button mode="contained" onPress={openPaymentSheet}>
+          Pay 10$
+        </Button>
+      </ScrollView>
+    </CheckoutContainer>
   );
 };
 

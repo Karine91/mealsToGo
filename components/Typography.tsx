@@ -59,16 +59,21 @@ const variants = {
 };
 
 type HeadingSize = Extract<keyof typeof fontSizes, `h${number}`>;
+type Variant = keyof typeof variants;
+type TextComponentProps<T extends Variant = Variant> = T extends any
+  ? {
+      variant?: T;
+      headingSize?: T extends "heading" ? HeadingSize : never;
+      style?: ((theme: Theme) => StyleProp<TextStyle>) | StyleProp<TextStyle>;
+    }
+  : never;
 
-const TextComponent = ({
+const TextComponent = <T extends Variant>({
   variant,
   style,
   ...props
-}: Omit<ComponentProps<typeof NativeText>, "style"> & {
-  variant?: keyof typeof variants;
-  headingSize?: HeadingSize;
-  style?: ((theme: Theme) => StyleProp<TextStyle>) | StyleProp<TextStyle>;
-}) => (
+}: Omit<ComponentProps<typeof NativeText>, "style"> &
+  TextComponentProps<T>) => (
   <NativeText
     {...props}
     style={typeof style === "function" ? style(theme) : style}

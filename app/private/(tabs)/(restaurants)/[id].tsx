@@ -1,4 +1,4 @@
-import { useLocalSearchParams, Stack } from "expo-router";
+import { useLocalSearchParams, Stack, useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { Text, SafeAreaView, View } from "react-native";
 import { Button } from "react-native-paper";
@@ -42,6 +42,7 @@ const RestaurantsDetail = () => {
   const { id } = useLocalSearchParams();
   const restaurant = useRestaurant(id as string);
   const { addToCart } = useContext(CartContext);
+  const router = useRouter();
 
   if (!restaurant) {
     return (
@@ -67,13 +68,17 @@ const RestaurantsDetail = () => {
           mode="contained"
           icon="cash-multiple"
           uppercase
-          onPress={() =>
-            addToCart({
-              item: "special",
-              price: 12.99,
-              restaurantId: restaurant.placeId,
-            })
-          }
+          onPress={() => {
+            addToCart(
+              {
+                item: "special",
+                price: 12.99,
+              },
+              restaurant
+            );
+            router.dismissAll();
+            router.navigate("/private/checkout");
+          }}
         >
           Order special only 12.99$!
         </SpecialOrderButton>
