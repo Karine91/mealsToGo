@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Avatar, Icon } from "react-native-paper";
+import { Avatar, Button, Icon } from "react-native-paper";
 import styled from "styled-components/native";
 
 export const NoCartContainer = styled(View)(({ theme }) => ({
@@ -19,4 +19,20 @@ export const CheckoutContainer = styled(View)(({ theme }) => ({
   gap: theme.space[3],
   backgroundColor: theme.colors.bg.primary,
   flex: 1,
+}));
+
+export const OrderDetailsContainer = styled(View)(({ theme }) => ({
+  padding: theme.space[3],
+}));
+
+export const ClearButton = styled(Button).attrs(({ theme }) => ({
+  buttonColor: theme.colors.error,
+}))({});
+
+export const PayButton = styled(Button).attrs(({ theme }) => ({
+  buttonColor: theme.colors.primary,
+}))({});
+
+export const ButtonsGroup = styled(View)(({ theme }) => ({
+  gap: theme.space[2],
 }));

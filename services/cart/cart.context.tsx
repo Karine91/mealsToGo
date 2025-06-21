@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {
   createContext,
   useState,
@@ -9,17 +8,20 @@ import React, {
 
 import { AuthContext } from "../auth/auth.context";
 import { RestaurantsItem } from "../restaurants/restaurants.service";
+import { useStorageValue } from "@/hooks/useStorageValue";
 
 export const CartContext = createContext<CartContextValue>({
   restaurant: null,
   cart: [],
   addToCart: () => {},
+  clearCart: () => {},
   totalPrice: 0,
 });
 
 type CartContextValue = {
   cart: CartItem[];
   addToCart: (item: CartItem, rst: RestaurantsItem) => void;
+  clearCart: () => void;
   restaurant: RestaurantsItem | null;
   totalPrice: number;
 };
@@ -31,8 +33,11 @@ export type CartItem = {
 
 export const CartContextProvider = ({ children }: PropsWithChildren) => {
   const { user } = useContext(AuthContext);
-  const [restaurant, setRestaurant] = useState<RestaurantsItem | null>(null);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [restaurant, setRestaurant] = useStorageValue<RestaurantsItem | null>(
+    `@restaurant-${user!.uid}`,
+    null
+  );
+  const [cart, setCart] = useStorageValue<CartItem[]>(`@cart-${user!.uid}`, []);
   const [totalPrice, setTotalPrice] = useState(() => getTotalPrice(cart));
 
   function getTotalPrice(cart: CartItem[]) {
@@ -55,8 +60,14 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <CartContext.Provider value={{ addToCart, cart, restaurant, totalPrice }}>
+    <CartContext.Provider
+      value={{ addToCart, cart, restaurant, totalPrice, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

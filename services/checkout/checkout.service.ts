@@ -27,3 +27,7 @@ export async function createCustomerRequest({ email }: { email: string }) {
     body: JSON.stringify({ email }),
   }).then((res) => res.json());
 }
+
+export async function getCustomerRequest(customerId: string) {
+  return fetch(`/api/customer/?id=${customerId}`).then((res) => res.json());
+}

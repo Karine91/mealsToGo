@@ -1,61 +1,76 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   createContext,
   PropsWithChildren,
-  useState,
   useContext,
   useEffect,
+  useState,
 } from "react";
+
+import { useStorageValue } from "@/hooks/useStorageValue";
 
 import { AuthContext } from "../auth/auth.context";
 
-import { createCustomerRequest } from "./checkout.service";
+import { createCustomerRequest, getCustomerRequest } from "./checkout.service";
 
 export const CheckoutContext = createContext<{
-  getCustomerId: () => Promise<string>;
+  customerId: string | null;
 }>({
-  getCustomerId: () => Promise.resolve(""),
+  customerId: null,
 });
 
 export const CheckoutContextProvider = ({ children }: PropsWithChildren) => {
-  const [customerId, setCustomerId] = useState<string | null>(null);
   const { user } = useContext(AuthContext);
-  const STORAGE_KEY = `@customerId-${user!.uid}`;
+  const [customerId, setCustomerId, isLoaded] = useStorageValue<string | null>(
+    `@customerId-${user!.uid}`,
+    null
+  );
+  const [isLoading, setLoading] = useState(true);
 
   const createCustomer = async () => {
     try {
-      const { customer } = await createCustomerRequest({ email: user!.email! });
+      const { customer } = await createCustomerRequest({
+        email: user!.email!,
+      });
       setCustomerId(customer);
-      AsyncStorage.setItem(STORAGE_KEY, customer);
       return customer;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getStoredCustomerId = async () => {
+  const retrieveCustomer = async (customerId: string) => {
     try {
-      const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
-      return jsonValue;
-    } catch (e) {
-      console.log(e);
+      const { customer } = await getCustomerRequest(customerId);
+      console.log("retrieved: ", customer, "requested:", customerId);
+      return customer;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  const getCustomer = async () => {
+    console.log({ customerId, isLoaded });
+    if (customerId) {
+      const id = await retrieveCustomer(customerId);
+      if (!id) {
+        await createCustomer();
+      }
+      setLoading(false);
+    } else if (isLoaded) {
+      await createCustomer();
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getStoredCustomerId().then((id) => id && setCustomerId(id));
-  }, []);
-
-  const getCustomerId = async () => {
-    if (!customerId) {
-      const id = await createCustomer();
-      return id;
-    }
-    return customerId;
-  };
+    getCustomer();
+  }, [isLoaded]);
 
   return (
-    <CheckoutContext.Provider value={{ getCustomerId }}>
+    <CheckoutContext.Provider
+      value={{ customerId: isLoading ? null : customerId }}
+    >
       {children}
     </CheckoutContext.Provider>
   );

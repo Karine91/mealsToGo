@@ -15,6 +15,6 @@ export async function GET(req: Request) {
   const customer = await stripe.customers.retrieve(id!);
 
   return Response.json({
-    customer: customer.id,
+    customer: customer.deleted ? null : customer.id,
   });
 }
