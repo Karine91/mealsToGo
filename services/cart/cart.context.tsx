@@ -1,14 +1,9 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-  PropsWithChildren,
-} from "react";
+import React, { createContext, useContext, PropsWithChildren } from "react";
+
+import { useStorageValue } from "@/hooks/useStorageValue";
 
 import { AuthContext } from "../auth/auth.context";
 import { RestaurantsItem } from "../restaurants/restaurants.service";
-import { useStorageValue } from "@/hooks/useStorageValue";
 
 export const CartContext = createContext<CartContextValue>({
   restaurant: null,
@@ -38,18 +33,12 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     null
   );
   const [cart, setCart] = useStorageValue<CartItem[]>(`@cart-${user!.uid}`, []);
-  const [totalPrice, setTotalPrice] = useState(() => getTotalPrice(cart));
 
   function getTotalPrice(cart: CartItem[]) {
     return cart.reduce((acc, cur) => {
       return acc + cur.price;
     }, 0);
   }
-
-  useEffect(() => {
-    const total = getTotalPrice(cart);
-    setTotalPrice(total);
-  }, [cart]);
 
   const addToCart = (item: CartItem, rst: RestaurantsItem) => {
     if (rst.placeId !== restaurant?.placeId) {
@@ -66,7 +55,13 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <CartContext.Provider
-      value={{ addToCart, cart, restaurant, totalPrice, clearCart }}
+      value={{
+        addToCart,
+        cart,
+        restaurant,
+        totalPrice: getTotalPrice(cart),
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

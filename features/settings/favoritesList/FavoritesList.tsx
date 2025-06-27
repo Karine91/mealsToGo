@@ -6,7 +6,7 @@ import RestaurantsList from "@/features/restaurants/components/restaurants-list/
 import { FavoritesContext } from "@/services/favorites/favorites.context";
 import { RestaurantsItem } from "@/services/restaurants/restaurants.service";
 
-import { NoDataContainer } from "./styles";
+import { NoDataContainer, FavoritesContainer } from "./styles";
 
 const FavoritesList = () => {
   const { favorites } = useContext(FavoritesContext);
@@ -29,10 +29,12 @@ const FavoritesList = () => {
     );
 
   return (
-    <RestaurantsList
-      data={favorites}
-      onItemClick={navigateToRestaurantsDetail}
-    />
+    <FavoritesContainer>
+      <RestaurantsList
+        data={favorites}
+        onItemClick={navigateToRestaurantsDetail}
+      />
+    </FavoritesContainer>
   );
 };
 

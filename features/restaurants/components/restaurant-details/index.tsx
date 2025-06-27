@@ -1,6 +1,6 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
-import { List } from "react-native-paper";
+import { List, Divider } from "react-native-paper";
 
 import { AccordionIcon, AccordionGroup, Accordion } from "./styles";
 
@@ -15,8 +15,11 @@ const RestaurantDetails = () => {
             left={(props) => <AccordionIcon icon="bread-slice" />}
           >
             <List.Item title="Eggs Benedict" />
+            <Divider />
             <List.Item title="Classic Breakfast" />
           </Accordion>
+          <Divider />
+
           <Accordion
             left={(props) => <AccordionIcon icon="hamburger" />}
             title="Lunch"
@@ -24,10 +27,13 @@ const RestaurantDetails = () => {
           >
             <View style={{ backgroundColor: "white" }}>
               <List.Item title="Burger w/Fries" />
+              <Divider />
               <List.Item title="Steak Sandwich" />
+              <Divider />
               <List.Item title="Mushroom Soup" />
             </View>
           </Accordion>
+          <Divider />
           <Accordion
             left={(props) => <AccordionIcon icon="food-turkey" />}
             title="Dinner"
@@ -35,10 +41,13 @@ const RestaurantDetails = () => {
           >
             <View style={{ backgroundColor: "white" }}>
               <List.Item title="Spaghetti Bolognese" />
+              <Divider />
               <List.Item title="Veal Cutlet with Chicken Mushroom Rotini" />
+              <Divider />
               <List.Item title="Steak Frites" />
             </View>
           </Accordion>
+          <Divider />
           <Accordion
             left={(props) => <AccordionIcon icon="glass-mug" />}
             title="Drinks"
@@ -46,9 +55,13 @@ const RestaurantDetails = () => {
           >
             <View style={{ backgroundColor: "white" }}>
               <List.Item title="Coffee" />
+              <Divider />
               <List.Item title="Tea" />
+              <Divider />
               <List.Item title="Modelo" />
+              <Divider />
               <List.Item title="Coke" />
+              <Divider />
               <List.Item title="Fanta" />
             </View>
           </Accordion>

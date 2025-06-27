@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 export const AccountContainer = styled(View)(({ theme }) => ({
   padding: theme.space[4],
-  backgroundColor: "rgba(255,255,255,0.7)",
+  backgroundColor: "rgba(255,255,255,0.5)",
   marginTop: theme.space[2],
   gap: theme.space[3],
   width: "60%",

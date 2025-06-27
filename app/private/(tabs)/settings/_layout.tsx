@@ -1,13 +1,15 @@
 import { Stack } from "expo-router";
 
 import { SafeAreaContainerView } from "@/components/SafeAreaContainer";
-
 const Settings = () => {
   return (
     <SafeAreaContainerView>
       <Stack
         screenOptions={{
           headerShown: true,
+          contentStyle: {
+            backgroundColor: "transparent",
+          },
         }}
       >
         <Stack.Screen name="index" options={{ title: "Settings" }} />

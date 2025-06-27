@@ -11,6 +11,7 @@ const SearchView = styled(View)(({ theme }) => ({
   zIndex: 999,
   top: 20,
   width: "100%",
+  boxShadow: "0px 3px 3px rgba(0,0,0,0.3)",
 }));
 
 const Search = () => {

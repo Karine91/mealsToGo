@@ -5,9 +5,10 @@ import { TouchableOpacity } from "react-native";
 import { List, Avatar } from "react-native-paper";
 
 import { Text } from "@/components/Typography";
+import { colors } from "@/infrastructure/theme/colors";
 import { AuthContext } from "@/services/auth/auth.context";
 
-import { SettingsItem, AvatarContainer } from "./styles";
+import { SettingsItem, AvatarContainer, SettingsListSection } from "./styles";
 
 const SettingsList = () => {
   const router = useRouter();
@@ -39,22 +40,41 @@ const SettingsList = () => {
         <Text variant="label">{user?.email}</Text>
       </AvatarContainer>
 
-      <List.Section>
+      <SettingsListSection>
         <SettingsItem
           title="Favorites"
           description="View your favorites"
           onPress={() =>
             router.navigate({ pathname: "/private/settings/favorites" })
           }
-          left={(props) => <List.Icon {...props} color="black" icon="heart" />}
+          left={(props) => (
+            <List.Icon {...props} color={colors.error} icon="heart" />
+          )}
+        />
+        <SettingsItem
+          title="Payment"
+          onPress={() => null}
+          left={(props) => (
+            <List.Icon {...props} color={colors.secondary} icon="cart" />
+          )}
+        />
+
+        <SettingsItem
+          title="Past Orders"
+          onPress={() => null}
+          left={(props) => (
+            <List.Icon {...props} color={colors.secondary} icon="history" />
+          )}
         />
 
         <SettingsItem
           title="Logout"
           onPress={onLogout}
-          left={(props) => <List.Icon {...props} color="black" icon="logout" />}
+          left={(props) => (
+            <List.Icon {...props} color={colors.secondary} icon="logout" />
+          )}
         />
-      </List.Section>
+      </SettingsListSection>
     </>
   );
 };

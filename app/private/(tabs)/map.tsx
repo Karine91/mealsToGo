@@ -56,7 +56,7 @@ const Maps = () => {
               latitude: location.lat,
               longitude: location.lng,
               latitudeDelta: latDelta,
-              longitudeDelta: 0.02,
+              longitudeDelta: 0.01,
             }}
           >
             {restaurants.map((restaurant) => {

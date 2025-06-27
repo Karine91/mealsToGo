@@ -1,12 +1,16 @@
 import React, { PropsWithChildren } from "react";
 
-import { AccountCover, BackgroundImageCover } from "./styles";
+import {
+  AccountCover,
+  BackgroundImageCover,
+  AccountCenteredContainer,
+} from "./styles";
 
 const AccountContainer = ({ children }: PropsWithChildren) => {
   return (
     <BackgroundImageCover>
       <AccountCover />
-      {children}
+      <AccountCenteredContainer>{children}</AccountCenteredContainer>
     </BackgroundImageCover>
   );
 };

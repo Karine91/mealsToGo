@@ -24,10 +24,14 @@ const DetailsContainer = styled(View)(({ theme }) => ({
   flex: 2,
 }));
 
-const CartContainer = styled(View)({
+const CardContainer = styled(View)(({ theme }) => ({
   flex: 2,
   zIndex: 1,
-});
+  paddingLeft: theme.space[3],
+  paddingRight: theme.space[3],
+  paddingTop: theme.space[2],
+  paddingBottom: theme.space[2],
+}));
 
 const SpecialOrderButton = styled(Button).attrs(({ theme }) => ({
   color: theme.colors.primary,
@@ -56,9 +60,9 @@ const RestaurantsDetail = () => {
   return (
     <ScreenView>
       <Stack.Screen options={{ title: restaurant.name, headerShown: true }} />
-      <CartContainer>
+      <CardContainer>
         <RestaurantInfoCard restaurant={restaurant} />
-      </CartContainer>
+      </CardContainer>
       <DetailsContainer>
         <RestaurantDetails />
       </DetailsContainer>

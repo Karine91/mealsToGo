@@ -37,7 +37,7 @@ const RestaurantInfoCard = ({ restaurant }: Props) => {
   const ratingArray = Array.from({ length: rating });
 
   return (
-    <CardStyled elevation={5}>
+    <CardStyled elevation={2}>
       <Favorite restaurant={restaurant} />
       <CardCover key={name} source={{ uri: photos[0] as string }} />
       <Info>

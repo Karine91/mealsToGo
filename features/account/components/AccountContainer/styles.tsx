@@ -6,8 +6,6 @@ export const BackgroundImageCover = styled(ImageBackground).attrs({
   resizeMode: "cover",
 })({
   flex: 1,
-  alignItems: "center",
-  justifyContent: "center",
 });
 
 export const AccountCover = styled(View)(({ theme }) => ({
@@ -15,4 +13,10 @@ export const AccountCover = styled(View)(({ theme }) => ({
   width: "100%",
   height: "100%",
   backgroundColor: "rgba(255,255,255,0.3)",
+}));
+
+export const AccountCenteredContainer = styled(View)(() => ({
+  alignItems: "center",
+  justifyContent: "center",
+  flex: 1,
 }));

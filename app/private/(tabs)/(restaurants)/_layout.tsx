@@ -2,6 +2,7 @@ import { Stack } from "expo-router";
 import React from "react";
 
 import { SafeAreaContainerView } from "@/components/SafeAreaContainer";
+import { colors } from "@/infrastructure/theme/colors";
 
 const RestaurantsStack = () => {
   return (
@@ -9,7 +10,7 @@ const RestaurantsStack = () => {
       <Stack
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: "#fff" },
+          contentStyle: { backgroundColor: colors.background },
         }}
       >
         <Stack.Screen name="index" />
@@ -17,7 +18,6 @@ const RestaurantsStack = () => {
           name="[id]"
           options={{ presentation: "modal", headerShown: true }}
         />
-       
       </Stack>
     </SafeAreaContainerView>
   );
