@@ -29,3 +29,9 @@ _Project uses mock data to display restaurants, so search functionality is limit
 - Styled-components
 - React native paper
 - Typescript
+
+## :camera_flash: Screenshots
+
+<p>
+    <img src="./screenshots/meals-to-go-add-to-favorites.gif" width="250">
+</p>
