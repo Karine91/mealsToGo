@@ -28,7 +28,6 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
     onSignUp(data.email.trim(), data.password.trim());
   };
 

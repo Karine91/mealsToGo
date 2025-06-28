@@ -41,7 +41,6 @@ export const CheckoutContextProvider = ({ children }: PropsWithChildren) => {
   const retrieveCustomer = async (customerId: string) => {
     try {
       const { customer } = await getCustomerRequest(customerId);
-      console.log("retrieved: ", customer, "requested:", customerId);
       return customer;
     } catch (error) {
       console.log(error);
@@ -50,7 +49,6 @@ export const CheckoutContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const getCustomer = async () => {
-    console.log({ customerId, isLoaded });
     if (customerId) {
       const id = await retrieveCustomer(customerId);
       if (!id) {

@@ -17,13 +17,13 @@ const MapMarker = ({ restaurant }: MapMarkerProps) => {
 
   return (
     <Marker
-      key={name}
       title={name}
       coordinate={{
         latitude: geometry.location.lat,
         longitude: geometry.location.lng,
       }}
       calloutOffset={{ x: 0, y: -50 }}
+      zIndex={10}
     >
       <MapCallout
         onPress={() =>
