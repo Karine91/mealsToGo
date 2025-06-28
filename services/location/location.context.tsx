@@ -47,6 +47,7 @@ export const LocationContextProvider = ({ children }: PropsWithChildren) => {
       .then(locationTransform)
       .then((result) => {
         setLocation(result);
+        setError(null);
       })
       .catch((err) => {
         setError(err);
