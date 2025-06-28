@@ -20,6 +20,7 @@ _Project uses mock data to display restaurants, so search functionality is limit
 - Show restaurants on a map with search option
 - Add restaurants to favorites
 - Add profile photo using the device's front camera
+- Payment processing with Stripe
 
 ## :wrench: Core used technologies
 
@@ -29,6 +30,7 @@ _Project uses mock data to display restaurants, so search functionality is limit
 - Styled-components
 - React native paper
 - Typescript
+- Stripe
 
 ## :camera_flash: Screenshots
 
