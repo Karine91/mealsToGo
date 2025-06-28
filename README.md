@@ -33,5 +33,5 @@ _Project uses mock data to display restaurants, so search functionality is limit
 ## :camera_flash: Screenshots
 
 <p>
-    <img src="./screenshots/meals-to-go-add-to-favorites.gif" width="250">
+    <img src="./screenshots/add-to-favorites.gif" width="250">
 </p>
