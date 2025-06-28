@@ -34,4 +34,8 @@ _Project uses mock data to display restaurants, so search functionality is limit
 
 <p>
     <img src="./screenshots/add-to-favorites.gif" width="250">
+    <img src="./screenshots/login.gif" width="250">
+    <img src="./screenshots/map-search.gif" width="250">
+    <img src="./screenshots/order-pay.gif" width="250">
+    <img src="./screenshots/settings-screen.gif" width="250">
 </p>
